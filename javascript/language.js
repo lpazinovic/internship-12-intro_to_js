@@ -1,10 +1,12 @@
-function inputLanguage(){
-    languageName = prompt("Unesite ime jezika.").trim();
-    if (languageName == "") return;
+languages = [];
 
-    var language = {
-        name: languageName,
-    }
+function inputLanguage() {
+  languageName = prompt("Unesite ime jezika.").trim();
+  if (languageName == "") return;
 
-    return language;
+  var language = {
+    name: languageName,
+  };
+
+  languages.push(language);
 }

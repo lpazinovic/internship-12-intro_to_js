@@ -1,10 +1,20 @@
-function inputCompany(){
-    companyName = prompt("Unesite ime firme").trim();
-    if (companyName == "") return;
+companies = [];
 
-    var company = {
-        name: companyName,
-    }
+function inputCompany() {
+  companyName = prompt("Unesite ime firme.").trim();
+  if (companyName == "") return;
 
-    return company;
+  var company = {
+    name: companyName,
+    developers: [],
+  };
+
+  companies.push(company);
+}
+
+function addDeveloperToCompany(developer) {
+  var company = companies.find(
+    (element) => element.name == developer.companyName
+  );
+  company.developers.push(developer);
 }

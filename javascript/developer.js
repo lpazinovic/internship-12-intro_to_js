@@ -1,3 +1,5 @@
+developers = [];
+
 function inputDeveloper() {
   var devName = prompt("Unesite puno ime developera.");
   if (devName == "") return;
@@ -20,7 +22,9 @@ function inputDeveloper() {
   while (devJob == null) {
     devJob = prompt(
       "Unesite radni odnos developera (nezaposlen, freelancer, radi u firmi)."
-    ).trim();
+    )
+      .trim()
+      .toLowerCase();
     if (devJob == "") return;
     switch (devJob) {
       case "nezaposlen":
@@ -41,8 +45,16 @@ function inputDeveloper() {
   var devCompanyName = null;
 
   if (devJob == job.EMPLOYED) {
-    devCompanyName = prompt("Unesite ime firme.");
-    if (companyName == "") return;
+    while (devCompanyName == null) {
+      devCompanyName = prompt("Unesite ime firme.");
+      if (devCompanyName == "") return;
+      if (
+        companies.find((element) => element.name == devCompanyName) == undefined
+      ) {
+        devCompanyName = null;
+        alert("Firma ne postoji.");
+      }
+    }
   }
 
   const type = {
@@ -54,9 +66,9 @@ function inputDeveloper() {
   var devType = null;
 
   while (devType == null) {
-    devType = prompt(
-      "Unesite tip developera (frontend, backend, fullstack)."
-    ).trim();
+    devType = prompt("Unesite tip developera (frontend, backend, fullstack).")
+      .trim()
+      .toLowerCase();
     if (devType == "") return;
     switch (devType) {
       case "frontend":
@@ -79,9 +91,18 @@ function inputDeveloper() {
 
   while (devLanguage != "") {
     devLanguage = prompt(
-      "Unesite jezik kojeg developer poznaje (ostaviti prazno za prekid)"
+      "Unesite jezike koje developer poznaje (ostaviti prazno za prekid)"
     ).trim();
-    if (devLanguage != "") devLanguages.push(devLanguage);
+    if (devLanguage != "") {
+      let language = {
+        name: devLanguage,
+      };
+
+      devLanguages.push(language);
+
+      if (languages.find((element) => element == language) == undefined)
+        languages.push(language);
+    }
   }
 
   var developer = {
@@ -92,5 +113,6 @@ function inputDeveloper() {
     languages: devLanguages,
   };
 
-  return developer;
+  developers.push(developer);
+  addDeveloperToCompany(developer);
 }
