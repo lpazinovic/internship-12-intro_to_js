@@ -244,5 +244,104 @@ function removeDeveloper(developers, companies) {
       return value != developer;
     });
     removeDeveloperFromCompany(developer, companies);
+  } else {
+    alert("Brisanje otkazano.");
   }
+}
+
+function readDevelopers(developers) {
+  for (developer of developers) {
+    printDeveloper(developer);
+  }
+}
+
+function readDevelopersByType(developers) {
+  var devType = null;
+
+  while (devType == null) {
+    devType = prompt("Unesite tip developera (frontend, backend, fullstack).")
+      .trim()
+      .toLowerCase();
+    if (devType == "") return;
+    switch (devType) {
+      case "frontend":
+        devType = type.FRONTEND;
+        break;
+      case "backend":
+        devType = type.BACKEND;
+        break;
+      case "fullstack":
+        devType = type.FULLSTACK;
+        break;
+      default:
+        devType = null;
+        break;
+    }
+  }
+
+  alert("Ispis developera s tim tipom.");
+
+  var developersToPrint = developers.filter(
+    (element) => element.type == devType
+  );
+
+  for (developer of developersToPrint) {
+    printDeveloper(developer);
+  }
+}
+
+function readDevelopersByJob(developers) {
+  var devJob = null;
+
+  while (devJob == null) {
+    devJob = prompt(
+      "Unesite radni odnos developera (nezaposlen, freelancer, radi u firmi)."
+    )
+      .trim()
+      .toLowerCase();
+    if (devJob == "") return;
+    switch (devJob) {
+      case "nezaposlen":
+        devJob = job.UNEMPLOYED;
+        break;
+      case "freelancer":
+        devJob = job.FREELANCER;
+        break;
+      case "radi u firmi":
+        devJob = job.EMPLOYED;
+        break;
+      default:
+        devJob = null;
+        break;
+    }
+  }
+
+  alert("Ispis developera s tim radnim odnosom.");
+
+  var developersToPrint = developers.filter((element) => element.job == devJob);
+
+  for (developer of developersToPrint) {
+    printDeveloper(developer);
+  }
+}
+
+function readDevelopersByLanguage(developers, languages) {
+  var devLanguageName = prompt("Unesite programski jezik.");
+  var devLanguage = languages.find(
+    (element) => element.name == devLanguageName
+  );
+
+  if (devLanguage != undefined) {
+    alert("Ispis developera koji poznavaju taj jezik.");
+
+    var developersToPrint = developers.filter(
+      (element) =>
+        element.languages.filter((language) => language == devLanguage) !=
+        undefined
+    );
+
+    for (developer of developersToPrint) {
+      printDeveloper(developer);
+    }
+  } else alert("Taj jezik ne postoji.");
 }

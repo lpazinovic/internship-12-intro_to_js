@@ -20,7 +20,9 @@
   var validInput = false;
 
   while (!validInput) {
-    var userChoice = prompt("Unos (0), izmjena (1), ispis (2), brisanje (3) ili izlazak (4)?");
+    var userChoice = prompt(
+      "Unos (0), izmjena (1), ispis (2), brisanje (3) ili izlazak (4)?"
+    );
 
     switch (userChoice) {
       case "0":
@@ -30,10 +32,10 @@
         edit(developers, companies, languages, job, type);
         break;
       case "2":
-        read();
+        read(developers, companies, languages);
         break;
       case "3":
-        delete();
+        remove(developers, companies, languages, job);
         break;
       case "4":
         validInput = true;
@@ -89,6 +91,73 @@ function edit(developers, companies, languages, job, type) {
         break;
       case "2":
         inputLanguage(languages);
+        break;
+      default:
+        validInput = false;
+        break;
+    }
+  }
+}
+
+function remove(developers, companies, languages, job) {
+  var validInput = false;
+
+  while (!validInput) {
+    var userChoice = prompt(
+      "Brisanje developera (0), firmi (1) ili jezika (2)?"
+    );
+
+    validInput = true;
+
+    switch (userChoice) {
+      case "0":
+        removeDeveloper(developers, companies);
+        break;
+      case "1":
+        removeCompany(developers, companies, job);
+        break;
+      case "2":
+        removeLanguage(languages, developers);
+        break;
+      default:
+        validInput = false;
+        break;
+    }
+  }
+}
+
+function read(developers, companies, languages) {
+  var validInput = false;
+
+  while (!validInput) {
+    var userChoice = prompt("Ispis developera (0), firmi (1) ili jezika (2)?");
+
+    validInput = true;
+
+    switch (userChoice) {
+      case "0":
+        var devChoice = prompt(
+          "Običan ispis (0), po tipu (1), po programskom jeziku (2) ili po radnom odnosu (3)?"
+        );
+        switch (devChoice) {
+          case "0":
+            readDevelopers(developers);
+            break;
+          case "1":
+            readDevelopersByType(developers);
+          case "2":
+            readDevelopersByLanguage(developers, languages);
+          case "3":
+            readDevelopersByJob(developers);
+          default:
+            break;
+        }
+        break;
+      case "1":
+        readCompanies(companies);
+        break;
+      case "2":
+        readLanguages(languages);
         break;
       default:
         validInput = false;

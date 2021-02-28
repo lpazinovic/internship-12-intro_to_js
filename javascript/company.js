@@ -13,18 +13,31 @@ function inputCompany(companies) {
 
 function addDeveloperToCompany(developer, companies) {
   var company = companies.find((element) => element == developer.company);
-  company.developers.push(developer);
+  if (company != undefined) company.developers.push(developer);
 }
 
 function removeDeveloperFromCompany(developer, companies) {
   var company = companies.find((element) => element == developer.company);
-  company.developers = company.developers.filter(function (
-    value,
-    index,
-    array
-  ) {
-    return value != developer;
-  });
+  if (company != undefined) {
+    company.developers = company.developers.filter(function (
+      value,
+      index,
+      array
+    ) {
+      return value != developer;
+    });
+  }
+}
+
+function readCompanies(companies) {
+  for (company of companies) {
+    let developers = "";
+    for (developer of company.developers) {
+      developers += `${developer.name} `;
+    }
+    developers.trim();
+    alert(`${company.name}: ${developers}`);
+  }
 }
 
 function editCompany(companies) {
@@ -58,5 +71,7 @@ function removeCompany(developers, companies, job) {
       developer.company = null;
       developer.job = job.UNEMPLOYED;
     }
+  } else {
+    alert("Brisanje otkazano.");
   }
 }

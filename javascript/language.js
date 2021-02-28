@@ -33,5 +33,13 @@ function removeLanguage(languages, developers) {
         return value != language;
       });
     }
+  } else {
+    alert("Brisanje otkazano.");
+  }
+}
+
+function readLanguages(languages) {
+  for (language of languages) {
+    alert(`${language.name}`);
   }
 }
