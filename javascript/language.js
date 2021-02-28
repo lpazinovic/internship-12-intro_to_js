@@ -1,7 +1,5 @@
-languages = [];
-
-function inputLanguage() {
-  languageName = prompt("Unesite ime jezika.").trim();
+function inputLanguage(languages) {
+  var languageName = prompt("Unesite ime jezika.").trim();
   if (languageName == "") return;
 
   var language = {
@@ -9,4 +7,31 @@ function inputLanguage() {
   };
 
   languages.push(language);
+  languages.sort();
+}
+
+function removeLanguage(languages, developers) {
+  var languageName = prompt("Unesite ime jezika.").trim();
+  if ((languageName = "")) return;
+
+  var language = languages.find((element) => element.name == languageName);
+
+  if (language != undefined && confirmDelete()) {
+    languages = languages.filter(function (value, index, arr) {
+      return value != language;
+    });
+
+    var developersToRemove = developers.filter(
+      (element) => element.language == language
+    );
+    for (let developer of developersToRemove) {
+      developer.languages = developer.languages.filter(function (
+        value,
+        index,
+        arr
+      ) {
+        return value != language;
+      });
+    }
+  }
 }
