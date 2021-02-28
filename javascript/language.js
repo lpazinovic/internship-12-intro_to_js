@@ -3,6 +3,7 @@ function inputLanguage(languages) {
   if (languageName == "") return;
 
   var language = {
+    id: null,
     name: languageName,
   };
 
@@ -40,6 +41,6 @@ function removeLanguage(languages, developers) {
 
 function readLanguages(languages) {
   for (language of languages) {
-    alert(`${language.name}`);
+    alert(`${language.id}: ${language.name}`);
   }
 }

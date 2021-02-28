@@ -3,6 +3,7 @@ function inputCompany(companies) {
   if (companyName == "") return;
 
   var company = {
+    id: null,
     name: companyName,
     developers: [],
   };
@@ -36,7 +37,7 @@ function readCompanies(companies) {
       developers += `${developer.name} `;
     }
     developers.trim();
-    alert(`${company.name}: ${developers}`);
+    alert(`${company.id}: ${company.name}: ${developers}`);
   }
 }
 

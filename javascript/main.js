@@ -44,9 +44,11 @@
         validInput = false;
         break;
     }
+    generateIds(developers);
+    generateIds(companies);
+    generateIds(languages);
   }
 
-  console.log(developers);
 })();
 
 function input(developers, companies, languages, job, type) {
@@ -148,7 +150,7 @@ function read(developers, companies, languages) {
           case "2":
             readDevelopersByLanguage(developers, languages);
           case "3":
-            readDevelopersByJob(developers);
+            readDevelopersByJob(developers, job);
           default:
             break;
         }
@@ -163,5 +165,13 @@ function read(developers, companies, languages) {
         validInput = false;
         break;
     }
+  }
+}
+
+function generateIds(values){
+  values.sort();
+
+  for(value of values){
+    value.id = values.indexOf(value);
   }
 }

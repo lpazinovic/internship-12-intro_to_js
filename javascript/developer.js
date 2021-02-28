@@ -87,7 +87,7 @@ function inputDeveloper(developers, job, type, companies, languages) {
 
       devLanguages.push(language);
 
-      if (languages.find((element) => element == language) == undefined)
+      if (languages.find((element) => element.name == language.name) == undefined)
         languages.push(language);
     }
   }
@@ -95,6 +95,7 @@ function inputDeveloper(developers, job, type, companies, languages) {
   var devCompany = companies.find((element) => element.name == devCompanyName);
 
   var developer = {
+    id: null,
     name: devName,
     job: devJob,
     company: devCompany,
@@ -209,7 +210,7 @@ function editDeveloper(developers, job, type, companies, languages) {
         )
           developer.languages.push(newLanguage);
 
-        if (languages.find((element) => element == newLanguage) == undefined)
+        if (languages.find((element) => element.name == newLanguage.name) == undefined)
           languages.push(newLanguage);
       }
     }
@@ -290,7 +291,7 @@ function readDevelopersByType(developers) {
   }
 }
 
-function readDevelopersByJob(developers) {
+function readDevelopersByJob(developers, job) {
   var devJob = null;
 
   while (devJob == null) {
